@@ -5,4 +5,14 @@ const user = require ('./routes/user')
 const order = require ('./routes/Order')
 
 const app = express()
-const port = 4000
+const port = 8000
+
+app.use(express.json())
+app.use('/customer', customer)
+app.use('/items',  item)
+app.use('/users',user)
+app.use('/orders',order)
+
+app.listen(port, () => {
+    console.log(`app starting on ${port}`);
+})
