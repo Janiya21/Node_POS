@@ -109,7 +109,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"id\": \"C012\",\n    \"name\": \"Thilina\",\n    \"address\": \"Galle\",\n    \"salary\": 13000\n}",
+									"raw": "{\n    \"id\": \"C012\",\n    \"name\": \"Janith\",\n    \"address\": \"Galle\",\n    \"salary\": 13000\n}",
 									"options": {
 										"raw": {
 											"language": "json"
