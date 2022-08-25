@@ -4,12 +4,12 @@ const item = require('./routes/item')
 const order = require('./routes/Order')
 
 const app = express()
-const port = 3000
+const port = 4000
 
 app.use(express.json())
-app.use('/customer', customer)
-app.use('/items', item)
-app.use('/orders',order)
+app.use('app/api/customer', customer)
+app.use('app/api/items', item)
+app.use('app/api/orders',order)
 
 
 app.listen(port, () => {
