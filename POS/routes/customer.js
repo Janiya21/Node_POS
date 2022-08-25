@@ -1,8 +1,9 @@
 const express = require('express')
 const mysql = require('mysql')
-const db = require('../configs/db.config')
+const db = require('../config/db')
 
 const connection = mysql.createConnection(db.database)
+const router = express.Router()
 
 connection.connect(function(err){
     if(err){
@@ -19,8 +20,6 @@ connection.connect(function(err){
         })
     }
 })
-
-const router = express.Router()
 
 router.get('/',(req, res) =>{   
     var query = "SELECT * FROM customer"
@@ -42,10 +41,22 @@ router.post('/',(req, res) =>{
 
     connection.query(query, [id, name, address, salary], (err) =>{
         if(err){
-            res.send({"message" : "duplicate entry"})
+            res.send({"message" : "This customer is already Exists"})
         }else{
             res.send({"message" : "Customer succesfully added!"})
         }
+    })
+})
+
+router.get('/:id', (req, res) => {
+    const id = req.params.id
+
+    var query = "SELECT * FROM customer WHERE id=?"
+
+    connection.query(query, [id], (err, rows) => {
+        if (err) console.log(err);
+
+        res.send(rows)
     })
 })
 
@@ -63,7 +74,7 @@ router.put('/',(req, res) =>{
         if(rows.affectedRows > 0){
             res.send({'message' : 'Customer Updated'})
         }else{
-            res.send({'message' : 'Customer not found'})
+            res.send({'message' : 'Not such a customer found'})
         }
     })
 })
@@ -79,21 +90,8 @@ router.delete('/:id', (req, res) => {
         if (rows.affectedRows > 0) {
             res.send({ 'message': 'Customer deleted' })
         } else {
-            res.send({ 'message': 'Customer not found' })
+            res.send({ 'message': 'Not such a customer found' })
         }
-    })
-})
-
-//get customer by id
-router.get('/:id', (req, res) => {
-    const id = req.params.id
-
-    var query = "SELECT * FROM customer WHERE id=?"
-
-    connection.query(query, [id], (err, rows) => {
-        if (err) console.log(err);
-
-        res.send(rows)
     })
 })
 
