@@ -31,9 +31,8 @@ connection.connect(function (err) {
             "    orderQty int," +
             "    price DOUBLE," +
             "    CONSTRAINT PRIMARY KEY (orderId,itemCode)," +
-            "    CONSTRAINT FOREIGN KEY (orderId) REFERENCES orders(orderId) ON DELETE CASCADE ON UPDATE CASCADE," +
-            "    CONSTRAINT FOREIGN KEY (itemCode) REFERENCES items(code) ON DELETE CASCADE ON UPDATE CASCADE" +
-            "" +
+            "    CONSTRAINT FOREIGN KEY (orderId) REFERENCES orders(orderId)," +
+            "    CONSTRAINT FOREIGN KEY (itemCode) REFERENCES items(code)" +
             ");"
         connection.query(orderDetailQuery, function (err,result) {
             if(err) throw  err
@@ -58,14 +57,32 @@ router.post('/',(req, res) =>{
     const orderId = req.body.orderId
     const date = req.body.date
     const customerId = req.body.customerId
-     
-    var query = "INSERT INTO orders (orderId, date, customerId) VALUES (?,?,?)"
+    let orderDetail =[];
+    orderDetail = req.body.orderDetail
+
+    const query = "INSERT INTO orders (orderId, date, customerId) VALUES (?,?,?)";
 
     connection.query(query, [orderId, date, customerId], (err) =>{
         if(err){
-            res.send({"message" : "duplicate entry"})
+            res.send({"message" : "This Order Already Exists"})
         }else{
-            res.send({"message" : "Order succesfully added!"})
+            for(let i=0; i < orderDetail.length; i++){
+                let orderId = orderDetail[i].orderId;
+                let itemCode = orderDetail[i].itemCode;
+                let orderQty = orderDetail[i].orderQty;
+                let price = orderDetail[i].price;
+                let orderDetailQuery = "INSERT INTO orderdetails (orderId,itemCode,orderQty,cost) VALUES (?,?,?,?)"
+
+                connection.query(orderDetailQuery,[orderId, itemCode, orderQty, price], (err)=>{
+                    if(err){
+                        res.send({
+                            message:err,
+                        })
+                    }else{
+                        res.send({message : "Order successfully added!"})
+                    }
+                })
+            }
         }
     })
 })
