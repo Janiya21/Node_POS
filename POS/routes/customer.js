@@ -1,5 +1,5 @@
 const express = require('express')
-const mysql = require('mysql')
+const mysql = require('mysql2')
 const db = require('../config/db')
 
 const connection = mysql.createConnection(db.database)
