@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "87760ee1-cfae-409c-acc0-2c76d8dedc73",
-		"name": "express_pos",
+		"_postman_id": "baa8202f-9d14-40b0-aa5d-5a7908bbe6e9",
+		"name": "GDSE-57/58 express_pos",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "18187994"
+		"_exporter_id": "13459672"
 	},
 	"item": [
 		{
@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":\"C-001\",\r\n    \"name\":\"tharindu\",\r\n    \"address\":\"aluthgama\",\r\n    \"salary\":\"500000\"\r\n}",
+							"raw": "{\r\n    \"id\":\"C-0001\",\r\n    \"name\":\"Dasun\",\r\n    \"address\":\"Colombo\",\r\n    \"salary\":\"500000\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,7 +24,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/api/customer",
+							"raw": "http://localhost:4000/app/api/customer",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -53,7 +53,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":\"C-002\",\r\n    \"name\":\"janith\",\r\n    \"address\":\"colombo\",\r\n    \"salary\":\"400000\"\r\n}",
+							"raw": "{\r\n    \"id\":\"C-0002\",\r\n    \"name\":\"Shanaka\",\r\n    \"address\":\"Panadura\",\r\n    \"salary\":\"400000\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -61,7 +61,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/api/customer",
+							"raw": "http://localhost:4000/app/api/customer",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -102,7 +102,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/api/item",
+							"raw": "http://localhost:4000/app/api/item",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -122,7 +122,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/api/item",
+							"raw": "http://localhost:4000/app/api/item",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -147,7 +147,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/api/order",
+							"raw": "http://localhost:4000/app/api/order",
 							"protocol": "http",
 							"host": [
 								"localhost"
