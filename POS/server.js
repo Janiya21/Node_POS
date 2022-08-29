@@ -6,7 +6,11 @@ const order = require('./routes/Order')
 const app = express()
 const port = 4000
 
-app.use(express.json())
+app.use(express.json());
+
+app.get('/',(req,res)=>{
+    res.send("POS System Started");
+})
 app.use('app/api/customer', customer)
 app.use('app/api/items', item)
 app.use('app/api/orders',order)

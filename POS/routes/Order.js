@@ -21,8 +21,31 @@ connection.connect(function(err){
     }
 })
 
-router.get('/',(req, res) =>{   
-    var query = "SELECT * FROM orders"
+connection.connect(function (err) {
+    if(err){
+        console.log(err);
+    }else{
+        let orderDetailQuery = "CREATE TABLE IF NOT EXISTS orderDetails(" +
+            "    orderId VARCHAR(6)," +
+            "    itemCode VARCHAR(6)," +
+            "    orderQty int," +
+            "    price DOUBLE," +
+            "    CONSTRAINT PRIMARY KEY (orderId,itemCode)," +
+            "    CONSTRAINT FOREIGN KEY (orderId) REFERENCES orders(orderId) ON DELETE CASCADE ON UPDATE CASCADE," +
+            "    CONSTRAINT FOREIGN KEY (itemCode) REFERENCES items(code) ON DELETE CASCADE ON UPDATE CASCADE" +
+            "" +
+            ");"
+        connection.query(orderDetailQuery, function (err,result) {
+            if(err) throw  err
+            if(result.warningCount === 0){
+                console.log('OrderDetail table created');
+            }
+        })
+    }
+})
+
+router.get('/',(req, res) =>{
+    const query = "SELECT * FROM orders";
 
     connection.query(query,(err,rows) =>{
         if(err) throw err
